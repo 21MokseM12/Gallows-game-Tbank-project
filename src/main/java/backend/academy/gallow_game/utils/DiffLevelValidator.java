@@ -3,6 +3,7 @@ package backend.academy.gallow_game.utils;
 import backend.academy.gallow_game.interfaces.Validator;
 
 public class DiffLevelValidator implements Validator {
+
     @Override
     public boolean isValid(String data) {
         return switch (data) {
