@@ -69,7 +69,14 @@ public enum Messages {
         3. Сложный
         4. Случайный уровень сложности
 
-        """);
+        """),
+
+    PLAY_AGAIN("""
+    Хотите сыграть еще раз?
+
+    1. Да
+    2. Нет
+    """);
 
     private final String message;
 

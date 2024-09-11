@@ -47,6 +47,8 @@ public class UserInterface {
         dataManager.write(Messages.CATEGORY_MESSAGE.toString());
     }
 
+    public void playAgainMessage() {dataManager.write(Messages.PLAY_AGAIN.toString());}
+
     public String read() {
         return dataManager.read();
     }
