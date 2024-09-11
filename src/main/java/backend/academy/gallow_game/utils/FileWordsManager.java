@@ -1,6 +1,7 @@
 package backend.academy.gallow_game.utils;
 
 import backend.academy.gallow_game.enums.Category;
+import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import lombok.experimental.UtilityClass;
 import java.io.BufferedReader;
@@ -47,9 +48,9 @@ public final class FileWordsManager {
 
     private String addDiffLevelToPath(String path, int diffLevel) {
         return switch (diffLevel) {
-            case 1 -> path.concat("easy.txt");
-            case 2 -> path.concat("medium.txt");
-            case 3 -> path.concat("hard.txt");
+            case 1 -> path.concat(DifficultLevel.EASY.getFileName());
+            case 2 -> path.concat(DifficultLevel.MEDIUM.getFileName());
+            case 3 -> path.concat(DifficultLevel.HARD.getFileName());
             default -> path;
         };
     }
