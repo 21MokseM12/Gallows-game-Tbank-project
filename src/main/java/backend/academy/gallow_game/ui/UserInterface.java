@@ -35,6 +35,18 @@ public class UserInterface {
         dataManager.write(Messages.ERROR_MESSAGE.toString());
     }
 
+    public void clear() {
+        //TODO
+    }
+
+    public void chooseDifficultLevel() {
+        dataManager.write(Messages.DIFFICULT_LEVEL_MESSAGE.toString());
+    }
+
+    public void chooseCategory() {
+        dataManager.write(Messages.CATEGORY_MESSAGE.toString());
+    }
+
     public String read() {
         return dataManager.read();
     }
