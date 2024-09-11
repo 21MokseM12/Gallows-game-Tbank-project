@@ -4,12 +4,14 @@ import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
 @UtilityClass
+@Log4j2
 public final class FileWordsManager {
 
     private final String PATH_TO_FILES = "./src/main/resources/words_categories/";
@@ -21,6 +23,7 @@ public final class FileWordsManager {
         try {
             return getDataFromFile(fullPath);
         } catch (IOException e) {
+            log.error("Слово не было найдено", e);
             throw new WordNotFoundException(e);
         }
     }
