@@ -23,6 +23,7 @@ public class UserInterface {
 
     public void chooseMenuVariant() {
         dataManager.write(Messages.CHOOSE_VARIANT.toString());
+        dataManager.write("\n");
     }
 
     public void getRulesFormatted(final int countFails) {
@@ -86,6 +87,10 @@ public class UserInterface {
     }
 
     public void playAgainMessage() {dataManager.write(Messages.PLAY_AGAIN.toString());}
+
+    public void getWinMessage() {dataManager.write(Messages.WIN_MESSAGE.toString());}
+
+    public void getLoseMessage() {dataManager.write(Messages.LOSE_MESSAGE.toString());}
 
     public String read() {
         return dataManager.read();

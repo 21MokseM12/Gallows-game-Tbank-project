@@ -82,7 +82,11 @@ public enum Messages {
 
     CHOSEN_CATEGORY("Категория: "),
 
-    CHOSEN_DIFF_LEVEL("Уровень сложности: ");
+    CHOSEN_DIFF_LEVEL("Уровень сложности: "),
+
+    WIN_MESSAGE("Поздравляю, ты победил!!!"),
+
+    LOSE_MESSAGE("К сожалению, ты проиграл :(");
 
     private final String message;
 
