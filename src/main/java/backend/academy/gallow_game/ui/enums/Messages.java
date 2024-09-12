@@ -76,7 +76,13 @@ public enum Messages {
 
     1. Да
     2. Нет
-    """);
+    """),
+
+    GAME_BEGIN("ИГРА НАЧАЛАСЬ!"),
+
+    CHOSEN_CATEGORY("Категория: "),
+
+    CHOSEN_DIFF_LEVEL("Уровень сложности: ");
 
     private final String message;
 
