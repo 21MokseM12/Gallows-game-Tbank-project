@@ -1,5 +1,6 @@
 package backend.academy.gallow_game.service;
 
+import backend.academy.gallow_game.enums.GameState;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import backend.academy.gallow_game.interfaces.Validator;
 import backend.academy.gallow_game.ui.UserInterface;
@@ -26,14 +27,13 @@ public class Session {
 
     private String diffLevel;
 
+    private GameState state = GameState.PLAY;
+
     public void start() {
         ui.clear();
 
         chooseCategory();
         chooseDiffLevel();
-
-        if (category.equals("6")) category = randomizer.getRandomCategory();
-        if (diffLevel.equals("4")) diffLevel = randomizer.getRandomDiffLevel();
 
         String word = DEFAULT_WORD;
         try {
@@ -46,6 +46,18 @@ public class Session {
         ui.sessionBegin();
         ui.getMessageOfChosenCategory(Integer.parseInt(category));
         ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
+
+        while (state.equals(GameState.PLAY)) {
+
+        }
+
+        if (state.equals(GameState.WIN)) {
+            ui.getWinMessage();
+
+        } else {
+            ui.getLoseMessage();
+
+        }
     }
 
     private void chooseCategory() {
@@ -58,6 +70,8 @@ public class Session {
             if (categoryValidator.isValid(category)) break;
             else ui.getErrorMessage();
         }
+
+        if (category.equals("6")) category = randomizer.getRandomCategory();
     }
 
     private void chooseDiffLevel() {
@@ -70,5 +84,7 @@ public class Session {
             if (diffLevelValidator.isValid(diffLevel)) break;
             else ui.getErrorMessage();
         }
+
+        if (diffLevel.equals("4")) diffLevel = randomizer.getRandomDiffLevel();
     }
 }
