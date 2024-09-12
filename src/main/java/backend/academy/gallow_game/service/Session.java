@@ -32,6 +32,9 @@ public class Session {
         chooseCategory();
         chooseDiffLevel();
 
+        if (category.equals("6")) category = randomizer.getRandomCategory();
+        if (diffLevel.equals("4")) diffLevel = randomizer.getRandomDiffLevel();
+
         String word = DEFAULT_WORD;
         try {
             word = randomizer.getRandomWord(Integer.parseInt(category), Integer.parseInt(diffLevel));
@@ -40,7 +43,9 @@ public class Session {
             System.exit(0);
         }
 
-
+        ui.sessionBegin();
+        ui.getMessageOfChosenCategory(Integer.parseInt(category));
+        ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
     }
 
     private void chooseCategory() {
