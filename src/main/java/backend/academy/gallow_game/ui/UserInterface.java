@@ -93,12 +93,14 @@ public class UserInterface {
     }
 
     public void getCurrentDictionary(Dictionary dictionary) {
-        dataManager.write("Доступные буквы: ");
+        dataManager.write(Messages.USABLE_LETTERS.toString());
         dictionary.getCurrentDictionary().stream().sorted().forEach(x -> System.out.print(x + " "));
         dataManager.write("\n");
     }
 
-
+    public void chooseLetter() {
+        dataManager.write(Messages.CHOOSE_LETTER.toString());
+    }
 
     public void getWinMessage() {dataManager.write(Messages.WIN_MESSAGE.toString());}
 

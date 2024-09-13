@@ -84,6 +84,10 @@ public enum Messages {
 
     CHOSEN_DIFF_LEVEL("Уровень сложности: "),
 
+    USABLE_LETTERS("Доступные буквы: "),
+
+    CHOOSE_LETTER("Назовите букву слова: "),
+
     WIN_MESSAGE("Поздравляю, ты победил!!!"),
 
     LOSE_MESSAGE("К сожалению, ты проиграл :(");
