@@ -1,19 +1,25 @@
 package backend.academy.gallow_game.service;
 
 import backend.academy.gallow_game.enums.GameState;
+import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import backend.academy.gallow_game.interfaces.Validator;
 import backend.academy.gallow_game.ui.UserInterface;
 import backend.academy.gallow_game.utils.CategoryValidator;
+import backend.academy.gallow_game.utils.Dictionary;
 import backend.academy.gallow_game.utils.DiffLevelValidator;
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 
 @Getter
+@Log4j2
 public class Session {
 
     private final UserInterface ui = new UserInterface();
 
     private final Randomizer randomizer = new Randomizer();
+
+    private final Dictionary dictionary = new Dictionary();
 
     private final Validator categoryValidator = new CategoryValidator();
 
@@ -38,8 +44,10 @@ public class Session {
         String word = DEFAULT_WORD;
         try {
             word = randomizer.getRandomWord(Integer.parseInt(category), Integer.parseInt(diffLevel));
-        } catch (WordNotFoundException _) {
+            dictionary.dictionaryCompletion();
+        } catch (WordNotFoundException | DictionaryNotFoundException e) {
             ui.getErrorMessage();
+            log.error("Слово или словарь не были найдены", e);
             System.exit(0);
         }
 
@@ -48,7 +56,11 @@ public class Session {
         ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
 
         while (state.equals(GameState.PLAY)) {
+            ui.getCurrentGallowsState();
+            ui.getCurrentDictionary();
 
+
+            if (COUNT_FAILS == 0) state = GameState.LOSE;
         }
 
         if (state.equals(GameState.WIN)) {
