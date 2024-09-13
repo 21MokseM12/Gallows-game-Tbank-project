@@ -4,6 +4,7 @@ import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
+import backend.academy.gallow_game.utils.Dictionary;
 
 public class UserInterface {
 
@@ -23,7 +24,6 @@ public class UserInterface {
 
     public void chooseMenuVariant() {
         dataManager.write(Messages.CHOOSE_VARIANT.toString());
-        dataManager.write("\n");
     }
 
     public void getRulesFormatted(final int countFails) {
@@ -87,6 +87,18 @@ public class UserInterface {
     }
 
     public void playAgainMessage() {dataManager.write(Messages.PLAY_AGAIN.toString());}
+
+    public void getCurrentGallowsState() {
+        //TODO
+    }
+
+    public void getCurrentDictionary(Dictionary dictionary) {
+        dataManager.write("Доступные буквы: ");
+        dictionary.getCurrentDictionary().stream().sorted().forEach(x -> System.out.print(x + " "));
+        dataManager.write("\n");
+    }
+
+
 
     public void getWinMessage() {dataManager.write(Messages.WIN_MESSAGE.toString());}
 
