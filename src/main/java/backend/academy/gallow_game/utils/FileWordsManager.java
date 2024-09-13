@@ -2,6 +2,7 @@ package backend.academy.gallow_game.utils;
 
 import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
+import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
@@ -14,10 +15,12 @@ import java.util.List;
 @Log4j2
 public final class FileWordsManager {
 
-    private final String PATH_TO_FILES = "./src/main/resources/words_categories/";
+    private final String PATH_TO_WORDS_CATEGORIES = "./src/main/resources/words_categories/";
+
+    private final String PATH_TO_DICTIONARY = "./src/main/resources/dictionary/dictionary.txt";
 
     public static List<String> getWordList(int category, int diffLevel) throws WordNotFoundException {
-        String fullPath = addCategoryToPath(PATH_TO_FILES, category);
+        String fullPath = addCategoryToPath(PATH_TO_WORDS_CATEGORIES, category);
         fullPath = addDiffLevelToPath(fullPath, diffLevel);
 
         try {
@@ -25,6 +28,14 @@ public final class FileWordsManager {
         } catch (IOException e) {
             log.error("Слово не было найдено", e);
             throw new WordNotFoundException(e);
+        }
+    }
+
+    public static List<String> getDictionary() throws DictionaryNotFoundException {
+        try {
+            return getDataFromFile(PATH_TO_DICTIONARY);
+        } catch (IOException e) {
+            throw new DictionaryNotFoundException(e);
         }
     }
 
