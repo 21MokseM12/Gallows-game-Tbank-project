@@ -4,11 +4,13 @@ import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
-import backend.academy.gallow_game.utils.Dictionary;
+import backend.academy.gallow_game.states.DictionaryStateManager;
 
 public class UserInterface {
 
     private final UserDataManager dataManager;
+
+
 
     public UserInterface() {
         this.dataManager = new UserDataManager();
@@ -88,18 +90,37 @@ public class UserInterface {
 
     public void playAgainMessage() {dataManager.write(Messages.PLAY_AGAIN.toString());}
 
-    public void getCurrentGallowsState() {
+    public void getCurrentGallowsState(int countFails) {
         //TODO
     }
 
-    public void getCurrentDictionary(Dictionary dictionary) {
+    public void getCurrentDictionaryState(DictionaryStateManager dictionary) {
         dataManager.write(Messages.USABLE_LETTERS.toString());
         dictionary.getCurrentDictionary().stream().sorted().forEach(x -> System.out.print(x + " "));
         dataManager.write("\n");
     }
 
+    public void getCurrentWordState() {
+        //TODO
+    }
+
     public void chooseLetter() {
         dataManager.write(Messages.CHOOSE_LETTER.toString());
+    }
+
+    public void wrongLetter() {
+        dataManager.write(Messages.WRONG_LETTER_ERROR.toString());
+        dataManager.write("\n");
+    }
+
+    public void wrongLetterChosen() {
+        dataManager.write(Messages.WRONG_LETTER_CHOSEN.toString());
+        dataManager.write("\n");
+    }
+
+    public void correctLetterChosen() {
+        dataManager.write(Messages.CORRECT_LETTER_CHOSEN.toString());
+        dataManager.write("\n");
     }
 
     public void getWinMessage() {dataManager.write(Messages.WIN_MESSAGE.toString());}

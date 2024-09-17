@@ -88,6 +88,12 @@ public enum Messages {
 
     CHOOSE_LETTER("Назовите букву слова: "),
 
+    WRONG_LETTER_ERROR("Вы не можете выбрать эту букву"),
+
+    WRONG_LETTER_CHOSEN("Вы выбрали неверную букву :("),
+
+    CORRECT_LETTER_CHOSEN("Вы правы, эта буква есть в слове!"),
+
     WIN_MESSAGE("Поздравляю, ты победил!!!"),
 
     LOSE_MESSAGE("К сожалению, ты проиграл :(");
