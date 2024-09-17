@@ -1,6 +1,7 @@
-package backend.academy.gallow_game.utils;
+package backend.academy.gallow_game.service;
 
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
+import backend.academy.gallow_game.utils.FileWordsManager;
 import java.util.List;
 
 public class Dictionary {
