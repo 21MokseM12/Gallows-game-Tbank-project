@@ -1,7 +1,7 @@
 package backend.academy.gallow_game.states;
 
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
-import backend.academy.gallow_game.utils.FileWordsManager;
+import backend.academy.gallow_game.utils.GameFilesManager;
 import java.util.List;
 
 public class DictionaryStateManager {
@@ -9,7 +9,7 @@ public class DictionaryStateManager {
     private List<String> dictionary;
 
     public void dictionaryCompletion() throws DictionaryNotFoundException {
-        dictionary = FileWordsManager.getDictionary();
+        dictionary = GameFilesManager.getDictionary();
     }
 
     public List<String> getCurrentDictionary() {

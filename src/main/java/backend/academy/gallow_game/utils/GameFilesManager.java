@@ -14,18 +14,20 @@ import java.util.stream.Collectors;
 
 @UtilityClass
 @Log4j2
-public final class FileWordsManager {
+public final class GameFilesManager {
 
-    private final String PATH_TO_WORDS_CATEGORIES = "./src/main/resources/words_categories/";
+    private static final String PATH_TO_WORDS_CATEGORIES = "./src/main/resources/words_categories/";
 
-    private final String PATH_TO_DICTIONARY = "./src/main/resources/dictionary/dictionary.txt";
+    private static final String PATH_TO_DICTIONARY = "./src/main/resources/dictionary/dictionary.txt";
+
+    private static final String PATH_TO_GALLOWS_STATES = "./src/main/resources/gallows_design/";
 
     public static List<String> getWordList(int category, int diffLevel) throws WordNotFoundException {
         String fullPath = addCategoryToPath(PATH_TO_WORDS_CATEGORIES, category);
         fullPath = addDiffLevelToPath(fullPath, diffLevel);
 
         try {
-            return getDataFromFile(fullPath);
+            return getWordsFromFile(fullPath);
         } catch (IOException e) {
             log.error("Слово не было найдено", e);
             throw new WordNotFoundException(e);
@@ -34,7 +36,7 @@ public final class FileWordsManager {
 
     public static List<String> getDictionary() throws DictionaryNotFoundException {
         try {
-            return getDataFromFile(PATH_TO_DICTIONARY);
+            return getWordsFromFile(PATH_TO_DICTIONARY);
         } catch (IOException e) {
             throw new DictionaryNotFoundException(e);
         }
@@ -70,9 +72,14 @@ public final class FileWordsManager {
         };
     }
 
-    private List<String> getDataFromFile(String filePath) throws IOException {
+    private List<String> getWordsFromFile(String filePath) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             return reader.lines().collect(Collectors.toList());
         }
+    }
+
+    private byte[] getPictureFromFile(String filePath) {
+        //TODO
+        return null;
     }
 }
