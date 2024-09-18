@@ -1,10 +1,10 @@
-package backend.academy.gallow_game.service;
+package backend.academy.gallow_game.states;
 
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.utils.FileWordsManager;
 import java.util.List;
 
-public class Dictionary {
+public class DictionaryStateManager {
 
     private List<String> dictionary;
 
