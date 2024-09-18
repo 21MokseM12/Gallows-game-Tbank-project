@@ -3,6 +3,7 @@ package backend.academy.gallow_game.utils;
 import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
+import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
@@ -42,8 +43,12 @@ public final class GameFilesManager {
         }
     }
 
-    public static List<String> getGallowsStates(int countFails) throws IOException {
-        return getDataFromFile(PATH_TO_GALLOWS_STATES + countFails + "_fail.txt");
+    public static List<String> getGallowsStates(int countFails) throws GallowsStateNotFoundException {
+        try {
+            return getDataFromFile(PATH_TO_GALLOWS_STATES + countFails + "_fail.txt");
+        } catch (IOException e) {
+            throw new GallowsStateNotFoundException(e);
+        }
     }
 
     private String addCategoryToPath(String path, int category) {
