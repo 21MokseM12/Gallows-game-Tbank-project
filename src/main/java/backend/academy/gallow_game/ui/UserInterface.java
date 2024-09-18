@@ -95,7 +95,9 @@ public class UserInterface {
     }
 
     public void getCurrentGallowsState(int countFails, int currentFails) throws GallowsStateNotFoundException {
+        dataManager.write("\n");
         GameFilesManager.getGallowsStates(countFails - currentFails).forEach(System.out::println);
+        dataManager.write("\n");
     }
 
     public void getCurrentDictionaryState(DictionaryStateManager dictionary) {
