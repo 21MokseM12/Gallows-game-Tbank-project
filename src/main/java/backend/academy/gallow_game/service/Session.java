@@ -64,8 +64,9 @@ public class Session {
         ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
 
         while (state.equals(GameState.PLAY)) {
-            ui.getCurrentWordState(wordManager);
             ui.getCurrentGallowsState(currentCountFails);
+            ui.getCurrentWordState(wordManager);
+            ui.getCurrentCountFails(currentCountFails);
             ui.getCurrentDictionaryState(dictionary);
 
             ui.chooseLetter();
