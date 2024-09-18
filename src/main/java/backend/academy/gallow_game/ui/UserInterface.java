@@ -2,10 +2,12 @@ package backend.academy.gallow_game.ui;
 
 import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
+import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
 import backend.academy.gallow_game.states.WordStateManager;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
 import backend.academy.gallow_game.states.DictionaryStateManager;
+import backend.academy.gallow_game.utils.GameFilesManager;
 
 public class UserInterface {
 
@@ -92,8 +94,8 @@ public class UserInterface {
         dataManager.write(Messages.PLAY_AGAIN.toString());
     }
 
-    public void getCurrentGallowsState(int countFails) {
-        //TODO
+    public void getCurrentGallowsState(int countFails, int currentFails) throws GallowsStateNotFoundException {
+        GameFilesManager.getGallowsStates(countFails - currentFails).forEach(System.out::println);
     }
 
     public void getCurrentDictionaryState(DictionaryStateManager dictionary) {
