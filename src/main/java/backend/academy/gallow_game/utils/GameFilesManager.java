@@ -42,7 +42,7 @@ public final class GameFilesManager {
         }
     }
 
-    public static List<String> getGallowsState(int countFails) throws IOException {
+    public static List<String> getGallowsStates(int countFails) throws IOException {
         return getDataFromFile(PATH_TO_GALLOWS_STATES + countFails + "_fail.txt");
     }
 
