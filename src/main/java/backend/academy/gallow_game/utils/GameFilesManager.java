@@ -27,7 +27,7 @@ public final class GameFilesManager {
         fullPath = addDiffLevelToPath(fullPath, diffLevel);
 
         try {
-            return getWordsFromFile(fullPath);
+            return getDataFromFile(fullPath);
         } catch (IOException e) {
             log.error("Слово не было найдено", e);
             throw new WordNotFoundException(e);
@@ -36,10 +36,14 @@ public final class GameFilesManager {
 
     public static List<String> getDictionary() throws DictionaryNotFoundException {
         try {
-            return getWordsFromFile(PATH_TO_DICTIONARY);
+            return getDataFromFile(PATH_TO_DICTIONARY);
         } catch (IOException e) {
             throw new DictionaryNotFoundException(e);
         }
+    }
+
+    public static List<String> getGallowsState(int countFails) throws IOException {
+        return getDataFromFile(PATH_TO_GALLOWS_STATES + countFails + "_fail.txt");
     }
 
     private String addCategoryToPath(String path, int category) {
@@ -72,14 +76,9 @@ public final class GameFilesManager {
         };
     }
 
-    private List<String> getWordsFromFile(String filePath) throws IOException {
+    private List<String> getDataFromFile(String filePath) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             return reader.lines().collect(Collectors.toList());
         }
-    }
-
-    private byte[] getPictureFromFile(String filePath) {
-        //TODO
-        return null;
     }
 }
