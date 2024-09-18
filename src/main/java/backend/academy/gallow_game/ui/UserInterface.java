@@ -108,6 +108,11 @@ public class UserInterface {
         dataManager.write("\n");
     }
 
+    public void getCurrentCountFails(int countFails) {
+        dataManager.write(Messages.CURRENT_COUNT_FAILS.toString());
+        dataManager.write(countFails + "\n");
+    }
+
     public void chooseLetter() {
         dataManager.write(Messages.CHOOSE_LETTER.toString());
     }
@@ -119,12 +124,12 @@ public class UserInterface {
 
     public void wrongLetterChosen() {
         dataManager.write(Messages.WRONG_LETTER_CHOSEN.toString());
-        dataManager.write("\n");
+        dataManager.write("\n\n");
     }
 
     public void correctLetterChosen() {
         dataManager.write(Messages.CORRECT_LETTER_CHOSEN.toString());
-        dataManager.write("\n");
+        dataManager.write("\n\n");
     }
 
     public void getWinMessage() {dataManager.write(Messages.WIN_MESSAGE.toString());}

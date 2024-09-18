@@ -96,6 +96,8 @@ public enum Messages {
 
     CURRENT_WORD("Слово: "),
 
+    CURRENT_COUNT_FAILS("Осталось прав на ошибку: "),
+
     WIN_MESSAGE("Поздравляю, ты победил!!!"),
 
     LOSE_MESSAGE("К сожалению, ты проиграл :(");
