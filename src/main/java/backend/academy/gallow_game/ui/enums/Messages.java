@@ -94,6 +94,8 @@ public enum Messages {
 
     CORRECT_LETTER_CHOSEN("Вы правы, эта буква есть в слове!"),
 
+    CURRENT_WORD("Слово: "),
+
     WIN_MESSAGE("Поздравляю, ты победил!!!"),
 
     LOSE_MESSAGE("К сожалению, ты проиграл :(");

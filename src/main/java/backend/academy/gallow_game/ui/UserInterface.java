@@ -2,6 +2,7 @@ package backend.academy.gallow_game.ui;
 
 import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
+import backend.academy.gallow_game.states.WordStateManager;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
 import backend.academy.gallow_game.states.DictionaryStateManager;
@@ -9,8 +10,6 @@ import backend.academy.gallow_game.states.DictionaryStateManager;
 public class UserInterface {
 
     private final UserDataManager dataManager;
-
-
 
     public UserInterface() {
         this.dataManager = new UserDataManager();
@@ -88,7 +87,10 @@ public class UserInterface {
         dataManager.write("\n\n");
     }
 
-    public void playAgainMessage() {dataManager.write(Messages.PLAY_AGAIN.toString());}
+    public void playAgainMessage() {
+        dataManager.write("\n");
+        dataManager.write(Messages.PLAY_AGAIN.toString());
+    }
 
     public void getCurrentGallowsState(int countFails) {
         //TODO
@@ -100,8 +102,10 @@ public class UserInterface {
         dataManager.write("\n");
     }
 
-    public void getCurrentWordState() {
-        //TODO
+    public void getCurrentWordState(WordStateManager wordManager) {
+        dataManager.write(Messages.CURRENT_WORD.toString());
+        dataManager.write(wordManager.getEncodedWord());
+        dataManager.write("\n");
     }
 
     public void chooseLetter() {
