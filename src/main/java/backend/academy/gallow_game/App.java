@@ -59,11 +59,13 @@ public class App {
                     break;
             }
 
-            ui.playAgainMessage();
-            ui.chooseMenuVariant();
-            String anotherGameResponse = ui.read();
+            if (!stopGameFlag) {
+                ui.playAgainMessage();
+                ui.chooseMenuVariant();
+                String anotherGameResponse = ui.read();
 
-            if (anotherGameResponse.equals("2")) stopGameFlag = true;
+                if (anotherGameResponse.equals("2")) stopGameFlag = true;
+            }
 
         } while (!stopGameFlag);
 
