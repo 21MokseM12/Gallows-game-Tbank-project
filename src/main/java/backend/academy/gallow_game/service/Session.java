@@ -4,9 +4,10 @@ import backend.academy.gallow_game.enums.GameState;
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import backend.academy.gallow_game.interfaces.Validator;
+import backend.academy.gallow_game.states.DictionaryStateManager;
+import backend.academy.gallow_game.states.WordStateManager;
 import backend.academy.gallow_game.ui.UserInterface;
 import backend.academy.gallow_game.utils.CategoryValidator;
-import backend.academy.gallow_game.utils.Dictionary;
 import backend.academy.gallow_game.utils.DiffLevelValidator;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -19,13 +20,15 @@ public class Session {
 
     private final Randomizer randomizer = new Randomizer();
 
-    private final Dictionary dictionary = new Dictionary();
+    private final DictionaryStateManager dictionary = new DictionaryStateManager();
+
+    private final WordStateManager wordManager = new WordStateManager();
 
     private final Validator categoryValidator = new CategoryValidator();
 
     private final Validator diffLevelValidator = new DiffLevelValidator();
 
-    private final int COUNT_FAILS = 4;
+    private final int COUNT_FAILS = 100;
 
     private final String DEFAULT_WORD = "Виселица";
 
@@ -35,16 +38,21 @@ public class Session {
 
     private GameState state = GameState.PLAY;
 
+    private int currentCountFails;
+
     public void start() {
         ui.clear();
 
         chooseCategory();
         chooseDiffLevel();
 
-        String word = DEFAULT_WORD;
+        String word;
         try {
-            word = randomizer.getRandomWord(Integer.parseInt(category), Integer.parseInt(diffLevel));
+            word = randomizer.getRandomWord(Integer.parseInt(category), Integer.parseInt(diffLevel)).toUpperCase();
             dictionary.dictionaryCompletion();
+            wordManager.word(word);
+            wordManager.correctWord(word);
+            currentCountFails = COUNT_FAILS;
         } catch (WordNotFoundException | DictionaryNotFoundException e) {
             ui.getErrorMessage();
             log.error("Слово или словарь не были найдены", e);
@@ -56,11 +64,24 @@ public class Session {
         ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
 
         while (state.equals(GameState.PLAY)) {
-            ui.getCurrentGallowsState();
-            ui.getCurrentDictionary();
+            ui.getCurrentWordState(wordManager);
+            ui.getCurrentGallowsState(currentCountFails);
+            ui.getCurrentDictionaryState(dictionary);
 
+            ui.chooseLetter();
+            String letter = ui.read().toUpperCase();
 
-            if (COUNT_FAILS == 0) state = GameState.LOSE;
+            if (dictionary.deleteLetter(letter)) {
+                if (wordManager.contains(letter)) {
+                    ui.correctLetterChosen();
+                    wordManager.changeLetter(letter);
+                    if (wordManager.wordIsGuessed()) state = GameState.WIN;
+                } else {
+                    ui.wrongLetterChosen();
+                    currentCountFails--;
+                    if (currentCountFails == 0) state = GameState.LOSE;
+                }
+            } else ui.wrongLetter();
         }
 
         if (state.equals(GameState.WIN)) {
