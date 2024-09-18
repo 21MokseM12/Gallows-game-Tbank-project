@@ -28,7 +28,7 @@ public class Session {
 
     private final Validator diffLevelValidator = new DiffLevelValidator();
 
-    private final int COUNT_FAILS = 100;
+    private final int COUNT_FAILS = 10;
 
     private final String DEFAULT_WORD = "Виселица";
 
@@ -85,13 +85,8 @@ public class Session {
             } else ui.wrongLetter();
         }
 
-        if (state.equals(GameState.WIN)) {
-            ui.getWinMessage();
-
-        } else {
-            ui.getLoseMessage();
-
-        }
+        if (state.equals(GameState.WIN)) ui.getWinMessage();
+        else ui.getLoseMessage();
     }
 
     private void chooseCategory() {
