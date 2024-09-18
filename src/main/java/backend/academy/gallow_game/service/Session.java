@@ -2,6 +2,7 @@ package backend.academy.gallow_game.service;
 
 import backend.academy.gallow_game.enums.GameState;
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
+import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import backend.academy.gallow_game.interfaces.Validator;
 import backend.academy.gallow_game.states.DictionaryStateManager;
@@ -64,7 +65,13 @@ public class Session {
         ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
 
         while (state.equals(GameState.PLAY)) {
-            ui.getCurrentGallowsState(currentCountFails);
+            try {
+                ui.getCurrentGallowsState(COUNT_FAILS, currentCountFails);
+            } catch (GallowsStateNotFoundException e) {
+                ui.getErrorMessage();
+                log.error("Файл отображения не был найден", e);
+                System.exit(0);
+            }
             ui.getCurrentWordState(wordManager);
             ui.getCurrentCountFails(currentCountFails);
             ui.getCurrentDictionaryState(dictionary);
