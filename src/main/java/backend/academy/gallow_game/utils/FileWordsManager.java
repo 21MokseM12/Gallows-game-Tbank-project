@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @UtilityClass
 @Log4j2
@@ -71,7 +72,7 @@ public final class FileWordsManager {
 
     private List<String> getDataFromFile(String filePath) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            return reader.lines().toList();
+            return reader.lines().collect(Collectors.toList());
         }
     }
 }
