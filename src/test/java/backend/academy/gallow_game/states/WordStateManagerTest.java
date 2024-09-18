@@ -50,4 +50,16 @@ public class WordStateManagerTest {
         stateManager.changeLetter("и");
         Assertions.assertNotEquals("_и___ица", stateManager.getEncodedWord());
     }
+
+    @Test
+    public void checkContainsLetterInWordSuccess() {
+        stateManager.word("Виселица");
+        Assertions.assertTrue(stateManager.contains("и"));
+    }
+
+    @Test
+    public void checkContainsLetterInWordDenied() {
+        stateManager.word("Виселица");
+        Assertions.assertFalse(stateManager.contains("я"));
+    }
 }

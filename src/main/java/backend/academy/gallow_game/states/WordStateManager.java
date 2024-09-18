@@ -30,4 +30,8 @@ public class WordStateManager {
     }
 
     public String getDecodedWord() {return this.word;}
+
+    public boolean contains(String letter) {
+        return this.word.contains(letter);
+    }
 }
