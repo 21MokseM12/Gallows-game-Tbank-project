@@ -94,6 +94,15 @@ public class Session {
 
         if (state.equals(GameState.WIN)) ui.getWinMessage();
         else ui.getLoseMessage();
+        state = GameState.PLAY;
+
+        try {
+            ui.getCurrentGallowsState(COUNT_FAILS, currentCountFails);
+        } catch (GallowsStateNotFoundException e) {
+            ui.getErrorMessage();
+            log.error("Файл отображения не был найден", e);
+            System.exit(0);
+        }
     }
 
     private void chooseCategory() {
