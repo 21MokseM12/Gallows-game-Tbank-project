@@ -63,12 +63,13 @@ public class UserInterface {
 
     public void getMessageOfChosenCategory(int category) {
         String message = Messages.CHOSEN_CATEGORY.toString();
-        message = switch (category) {
-            case 1 -> message.concat(Category.CITIES.getCategoryRU());
-            case 2 -> message.concat(Category.CLOTHES.getCategoryRU());
-            case 3 -> message.concat(Category.EAT.getCategoryRU());
-            case 4 -> message.concat(Category.SPORT.getCategoryRU());
-            case 5 -> message.concat(Category.TECHNIC.getCategoryRU());
+        final String categoryString = String.valueOf(category);
+        message = switch (categoryString) {
+            case "1" -> message.concat(Category.CITIES.getCategoryRU());
+            case "2" -> message.concat(Category.CLOTHES.getCategoryRU());
+            case "3" -> message.concat(Category.EAT.getCategoryRU());
+            case "4" -> message.concat(Category.SPORT.getCategoryRU());
+            case "5" -> message.concat(Category.TECHNIC.getCategoryRU());
             default -> message;
         };
 
@@ -78,10 +79,11 @@ public class UserInterface {
 
     public void getMessageOfChosenDiffLevel(int diffLevel) {
         String message = Messages.CHOSEN_DIFF_LEVEL.toString();
-        message = switch (diffLevel) {
-            case 1 -> message.concat(DifficultLevel.EASY.getLevelName());
-            case 2 -> message.concat(DifficultLevel.MEDIUM.getLevelName());
-            case 3 -> message.concat(DifficultLevel.HARD.getLevelName());
+        final String diffLevelString = String.valueOf(diffLevel);
+        message = switch (diffLevelString) {
+            case "1" -> message.concat(DifficultLevel.EASY.getLevelName());
+            case "2" -> message.concat(DifficultLevel.MEDIUM.getLevelName());
+            case "3" -> message.concat(DifficultLevel.HARD.getLevelName());
             default -> message;
         };
 
