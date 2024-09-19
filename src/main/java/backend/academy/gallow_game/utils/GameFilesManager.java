@@ -5,13 +5,13 @@ import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
-import lombok.experimental.UtilityClass;
-import lombok.extern.log4j.Log4j2;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 
 @UtilityClass
 @Log4j2

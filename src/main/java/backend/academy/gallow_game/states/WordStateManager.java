@@ -14,22 +14,30 @@ public class WordStateManager {
     }
 
     public boolean wordIsGuessed() {
-        for (int i = 0; i < this.word.length(); i++)
-            if (!(word.charAt(i) == '_')) return false;
+        for (int i = 0; i < this.word.length(); i++) {
+            if (!(word.charAt(i) == '_')) {
+                return false;
+            }
+        }
         return true;
     }
 
     public String getEncodedWord() {
         StringBuilder resultWord = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) != '_') resultWord.append('_');
-            else resultWord.append(correctWord.charAt(i));
+            if (word.charAt(i) != '_') {
+                resultWord.append('_');
+            } else {
+                resultWord.append(correctWord.charAt(i));
+            }
         }
 
         return resultWord.toString();
     }
 
-    public String getDecodedWord() {return this.word;}
+    public String getDecodedWord() {
+        return this.word;
+    }
 
     public boolean contains(String letter) {
         return this.word.contains(letter);

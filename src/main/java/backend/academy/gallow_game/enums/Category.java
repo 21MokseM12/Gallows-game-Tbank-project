@@ -21,7 +21,11 @@ public enum Category {
         this.categoryNameEN = nameEN;
     }
 
-    public String getCategoryRU() {return this.categoryNameRU;}
+    public String getCategoryRU() {
+        return this.categoryNameRU;
+    }
 
-    public String getCategoryEN() {return this.categoryNameEN;}
+    public String getCategoryEN() {
+        return this.categoryNameEN;
+    }
 }

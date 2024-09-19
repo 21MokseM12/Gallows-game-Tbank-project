@@ -13,7 +13,11 @@ public enum DifficultLevel {
         this.diffLevelFileName = fileName;
     }
 
-    public String getFileName() {return this.diffLevelFileName;}
+    public String getFileName() {
+        return this.diffLevelFileName;
+    }
 
-    public String getLevelName() {return this.diffLevelName;}
+    public String getLevelName() {
+        return this.diffLevelName;
+    }
 }

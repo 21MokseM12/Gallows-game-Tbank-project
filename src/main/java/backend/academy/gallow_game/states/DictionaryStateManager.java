@@ -20,6 +20,8 @@ public class DictionaryStateManager {
         if (dictionary.contains(letter)) {
             dictionary.remove(letter);
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 }
