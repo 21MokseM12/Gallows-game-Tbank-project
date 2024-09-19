@@ -53,20 +53,21 @@ public final class GameFilesManager {
     }
 
     private String addCategoryToPath(String path, int category) {
-        return switch (category) {
-            case 1 -> path
+        final String categoryString = String.valueOf(category);
+        return switch (categoryString) {
+            case "1" -> path
                 .concat(Category.CITIES.getCategoryEN())
                 .concat("/");
-            case 2 -> path
+            case "2" -> path
                 .concat(Category.CLOTHES.getCategoryEN())
                 .concat("/");
-            case 3 -> path
+            case "3" -> path
                 .concat(Category.EAT.getCategoryEN())
                 .concat("/");
-            case 4 -> path
+            case "4" -> path
                 .concat(Category.SPORT.getCategoryEN())
                 .concat("/");
-            case 5 -> path
+            case "5" -> path
                 .concat(Category.TECHNIC.getCategoryEN())
                 .concat("/");
             default -> path;
@@ -74,10 +75,11 @@ public final class GameFilesManager {
     }
 
     private String addDiffLevelToPath(String path, int diffLevel) {
-        return switch (diffLevel) {
-            case 1 -> path.concat(DifficultLevel.EASY.getFileName());
-            case 2 -> path.concat(DifficultLevel.MEDIUM.getFileName());
-            case 3 -> path.concat(DifficultLevel.HARD.getFileName());
+        final String diffLevelString = String.valueOf(diffLevel);
+        return switch (diffLevelString) {
+            case "1" -> path.concat(DifficultLevel.EASY.getFileName());
+            case "2" -> path.concat(DifficultLevel.MEDIUM.getFileName());
+            case "3" -> path.concat(DifficultLevel.HARD.getFileName());
             default -> path;
         };
     }
