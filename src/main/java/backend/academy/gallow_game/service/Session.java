@@ -13,7 +13,6 @@ import backend.academy.gallow_game.utils.DiffLevelValidator;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
-@Getter
 @Log4j2
 public class Session {
 
@@ -29,9 +28,7 @@ public class Session {
 
     private final Validator diffLevelValidator = new DiffLevelValidator();
 
-    private final int COUNT_FAILS = 10;
-
-    private final String DEFAULT_WORD = "Виселица";
+    @Getter private final int countFails = 10;
 
     private String category;
 
@@ -53,7 +50,7 @@ public class Session {
             dictionary.dictionaryCompletion();
             wordManager.word(word);
             wordManager.correctWord(word);
-            currentCountFails = COUNT_FAILS;
+            currentCountFails = countFails;
         } catch (WordNotFoundException | DictionaryNotFoundException e) {
             ui.getErrorMessage();
             log.error("Слово или словарь не были найдены", e);
@@ -66,7 +63,7 @@ public class Session {
 
         while (state.equals(GameState.PLAY)) {
             try {
-                ui.getCurrentGallowsState(COUNT_FAILS, currentCountFails);
+                ui.getCurrentGallowsState(countFails, currentCountFails);
             } catch (GallowsStateNotFoundException e) {
                 ui.getErrorMessage();
                 log.error("Файл отображения не был найден", e);
@@ -83,21 +80,30 @@ public class Session {
                 if (wordManager.contains(letter)) {
                     ui.correctLetterChosen();
                     wordManager.changeLetter(letter);
-                    if (wordManager.wordIsGuessed()) state = GameState.WIN;
+                    if (wordManager.wordIsGuessed()) {
+                        state = GameState.WIN;
+                    }
                 } else {
                     ui.wrongLetterChosen();
                     currentCountFails--;
-                    if (currentCountFails == 0) state = GameState.LOSE;
+                    if (currentCountFails == 0) {
+                        state = GameState.LOSE;
+                    }
                 }
-            } else ui.wrongLetter();
+            } else {
+                ui.wrongLetter();
+            }
         }
 
-        if (state.equals(GameState.WIN)) ui.getWinMessage();
-        else ui.getLoseMessage();
+        if (state.equals(GameState.WIN)) {
+            ui.getWinMessage();
+        } else {
+            ui.getLoseMessage();
+        }
         state = GameState.PLAY;
 
         try {
-            ui.getCurrentGallowsState(COUNT_FAILS, currentCountFails);
+            ui.getCurrentGallowsState(countFails, currentCountFails);
         } catch (GallowsStateNotFoundException e) {
             ui.getErrorMessage();
             log.error("Файл отображения не был найден", e);
@@ -112,11 +118,16 @@ public class Session {
             category = ui.read();
             ui.clear();
 
-            if (categoryValidator.isValid(category)) break;
-            else ui.getErrorMessage();
+            if (categoryValidator.isValid(category)) {
+                break;
+            } else {
+                ui.getErrorMessage();
+            }
         }
 
-        if (category.equals("6")) category = randomizer.getRandomCategory();
+        if (category.equals("6")) {
+            category = randomizer.getRandomCategory();
+        }
     }
 
     private void chooseDiffLevel() {
@@ -126,10 +137,15 @@ public class Session {
             diffLevel = ui.read();
             ui.clear();
 
-            if (diffLevelValidator.isValid(diffLevel)) break;
-            else ui.getErrorMessage();
+            if (diffLevelValidator.isValid(diffLevel)) {
+                break;
+            } else {
+                ui.getErrorMessage();
+            }
         }
 
-        if (diffLevel.equals("4")) diffLevel = randomizer.getRandomDiffLevel();
+        if (diffLevel.equals("4")) {
+            diffLevel = randomizer.getRandomDiffLevel();
+        }
     }
 }
