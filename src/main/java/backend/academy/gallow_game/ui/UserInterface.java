@@ -8,7 +8,9 @@ import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
 import backend.academy.gallow_game.states.DictionaryStateManager;
 import backend.academy.gallow_game.utils.GameFilesManager;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class UserInterface {
 
     private final UserDataManager dataManager;
@@ -44,8 +46,6 @@ public class UserInterface {
 
     public void clear() {
         //TODO
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
     public void chooseDifficultLevel() {
