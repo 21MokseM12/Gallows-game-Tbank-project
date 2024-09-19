@@ -8,6 +8,7 @@ import backend.academy.gallow_game.interfaces.Validator;
 import backend.academy.gallow_game.states.DictionaryStateManager;
 import backend.academy.gallow_game.states.WordStateManager;
 import backend.academy.gallow_game.ui.UserInterface;
+import backend.academy.gallow_game.ui.enums.Logs;
 import backend.academy.gallow_game.utils.CategoryValidator;
 import backend.academy.gallow_game.utils.DiffLevelValidator;
 import lombok.Getter;
@@ -53,7 +54,7 @@ public class Session {
             currentCountFails = countFails;
         } catch (WordNotFoundException | DictionaryNotFoundException e) {
             ui.getErrorMessage();
-            log.error("Слово или словарь не были найдены", e);
+            log.error(Logs.IOEXCEPTION_WRAPPER_NOT_FOUND_LOG.toString(), e);
             System.exit(0);
         }
 
@@ -66,7 +67,7 @@ public class Session {
                 ui.getCurrentGallowsState(countFails, currentCountFails);
             } catch (GallowsStateNotFoundException e) {
                 ui.getErrorMessage();
-                log.error("Файл отображения не был найден", e);
+                log.error(Logs.DISPLAY_FILE_NOT_FOUND_LOG.toString(), e);
                 System.exit(0);
             }
             ui.getCurrentWordState(wordManager);
@@ -106,7 +107,7 @@ public class Session {
             ui.getCurrentGallowsState(countFails, currentCountFails);
         } catch (GallowsStateNotFoundException e) {
             ui.getErrorMessage();
-            log.error("Файл отображения не был найден", e);
+            log.error(Logs.DISPLAY_FILE_NOT_FOUND_LOG.toString(), e);
             System.exit(0);
         }
     }

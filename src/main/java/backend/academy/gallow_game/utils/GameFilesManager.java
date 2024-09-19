@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import backend.academy.gallow_game.ui.enums.Logs;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 
@@ -30,7 +31,7 @@ public final class GameFilesManager {
         try {
             return getDataFromFile(fullPath);
         } catch (IOException e) {
-            log.error("Слово не было найдено", e);
+            log.error(Logs.WORD_NOT_FOUND_LOG.toString(), e);
             throw new WordNotFoundException(e);
         }
     }
