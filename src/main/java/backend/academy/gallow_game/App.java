@@ -2,73 +2,75 @@ package backend.academy.gallow_game;
 
 import backend.academy.gallow_game.service.Session;
 import backend.academy.gallow_game.ui.UserInterface;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
-public class App {
+public final class App {
 
-    private static final UserInterface ui = new UserInterface();
+    private static final UserInterface UI = new UserInterface();
 
-    private static final Session session = new Session();
+    private static final Session SESSION = new Session();
 
     private static boolean stopGameFlag = false;
 
+    private App() {}
+
     public static void main(String[] args) {
-        ui.clear();
-        ui.getGreeting();
+        UI.clear();
+        UI.getGreeting();
 
         do {
-            ui.getMenu();
-            ui.chooseMenuVariant();
+            UI.getMenu();
+            UI.chooseMenuVariant();
 
-            String mainMenuResponse = ui.read();
+            String mainMenuResponse = UI.read();
 
-            ui.clear();
+            UI.clear();
 
             switch (mainMenuResponse) {
                 case "1":
-                    session.start();
+                    SESSION.start();
                     break;
                 case "2":
-                    ui.getRulesFormatted(session.COUNT_FAILS());
-                    ui.chooseMenuVariant();
+                    UI.getRulesFormatted(SESSION.countFails());
+                    UI.chooseMenuVariant();
 
-                    String rulesMenuResponse = ui.read();
+                    String rulesMenuResponse = UI.read();
 
-                    ui.clear();
+                    UI.clear();
 
                     switch (rulesMenuResponse) {
                         case "1":
-                            session.start();
+                            SESSION.start();
                             break;
                         case "2":
-                            ui.getExitMessage();
+                            UI.getExitMessage();
                             stopGameFlag = true;
                             break;
                         default:
-                            ui.getErrorMessage();
+                            UI.getErrorMessage();
                             break;
                     }
                     break;
                 case "3":
-                    ui.getExitMessage();
+                    UI.getExitMessage();
                     stopGameFlag = true;
                     break;
                 default:
-                    ui.getErrorMessage();
+                    UI.getErrorMessage();
                     break;
             }
 
             if (!stopGameFlag) {
-                ui.playAgainMessage();
-                ui.chooseMenuVariant();
-                String anotherGameResponse = ui.read();
+                UI.playAgainMessage();
+                UI.chooseMenuVariant();
+                String anotherGameResponse = UI.read();
 
-                if (anotherGameResponse.equals("2")) stopGameFlag = true;
+                if (anotherGameResponse.equals("2")) {
+                    stopGameFlag = true;
+                }
             }
 
         } while (!stopGameFlag);
 
-        ui.getExitMessage();
+        UI.getExitMessage();
     }
 }
