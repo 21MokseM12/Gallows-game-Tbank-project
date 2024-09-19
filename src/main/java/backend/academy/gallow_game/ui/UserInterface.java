@@ -3,10 +3,10 @@ package backend.academy.gallow_game.ui;
 import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
+import backend.academy.gallow_game.states.DictionaryStateManager;
 import backend.academy.gallow_game.states.WordStateManager;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
-import backend.academy.gallow_game.states.DictionaryStateManager;
 import backend.academy.gallow_game.utils.GameFilesManager;
 import lombok.extern.log4j.Log4j2;
 
@@ -41,7 +41,7 @@ public class UserInterface {
 
     public void getErrorMessage() {
         dataManager.write(Messages.ERROR_MESSAGE.toString());
-        dataManager.write("\n\n");
+        doubleNewLine();
     }
 
     public void clear() {
@@ -58,7 +58,7 @@ public class UserInterface {
 
     public void sessionBegin() {
         dataManager.write(Messages.GAME_BEGIN.toString());
-        dataManager.write("\n");
+        newLine();
     }
 
     public void getMessageOfChosenCategory(int category) {
@@ -73,7 +73,7 @@ public class UserInterface {
         };
 
         dataManager.write(message);
-        dataManager.write("\n");
+        newLine();
     }
 
     public void getMessageOfChosenDiffLevel(int diffLevel) {
@@ -86,35 +86,36 @@ public class UserInterface {
         };
 
         dataManager.write(message);
-        dataManager.write("\n\n");
+        doubleNewLine();
     }
 
     public void playAgainMessage() {
-        dataManager.write("\n");
+        newLine();
         dataManager.write(Messages.PLAY_AGAIN.toString());
     }
 
     public void getCurrentGallowsState(int countFails, int currentFails) throws GallowsStateNotFoundException {
-        dataManager.write("\n");
+        newLine();
         GameFilesManager.getGallowsStates(countFails - currentFails).forEach(System.out::println);
-        dataManager.write("\n");
+        newLine();
     }
 
     public void getCurrentDictionaryState(DictionaryStateManager dictionary) {
         dataManager.write(Messages.USABLE_LETTERS.toString());
-        dictionary.getCurrentDictionary().stream().sorted().forEach(x -> System.out.print(x + " "));
-        dataManager.write("\n");
+        dictionary.getCurrentDictionary().stream().sorted().forEach(x -> dataManager.write(x + " "));
+        newLine();
     }
 
     public void getCurrentWordState(WordStateManager wordManager) {
         dataManager.write(Messages.CURRENT_WORD.toString());
         dataManager.write(wordManager.getEncodedWord());
-        dataManager.write("\n");
+        newLine();
     }
 
     public void getCurrentCountFails(int countFails) {
         dataManager.write(Messages.CURRENT_COUNT_FAILS.toString());
-        dataManager.write(countFails + "\n");
+        dataManager.write(String.valueOf(countFails));
+        newLine();
     }
 
     public void chooseLetter() {
@@ -123,24 +124,37 @@ public class UserInterface {
 
     public void wrongLetter() {
         dataManager.write(Messages.WRONG_LETTER_ERROR.toString());
-        dataManager.write("\n");
+        newLine();
     }
 
     public void wrongLetterChosen() {
         dataManager.write(Messages.WRONG_LETTER_CHOSEN.toString());
-        dataManager.write("\n\n");
+        doubleNewLine();
     }
 
     public void correctLetterChosen() {
         dataManager.write(Messages.CORRECT_LETTER_CHOSEN.toString());
-        dataManager.write("\n\n");
+        doubleNewLine();
     }
 
-    public void getWinMessage() {dataManager.write(Messages.WIN_MESSAGE.toString());}
+    public void getWinMessage() {
+        dataManager.write(Messages.WIN_MESSAGE.toString());
+    }
 
-    public void getLoseMessage() {dataManager.write(Messages.LOSE_MESSAGE.toString());}
+    public void getLoseMessage() {
+        dataManager.write(Messages.LOSE_MESSAGE.toString());
+    }
 
     public String read() {
         return dataManager.read();
+    }
+
+    private void newLine() {
+        dataManager.write("\n");
+    }
+
+    private void doubleNewLine() {
+        newLine();
+        newLine();
     }
 }
