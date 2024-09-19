@@ -3,6 +3,7 @@ package backend.academy.gallow_game;
 import backend.academy.gallow_game.service.Session;
 import backend.academy.gallow_game.ui.UserInterface;
 
+@SuppressWarnings("uncommentedmain")
 public final class App {
 
     private static final UserInterface UI = new UserInterface();
