@@ -12,7 +12,7 @@ public class UserDataManager {
     }
 
     public void write(String data) {
-        System.out.println(data);
+        System.out.print(data);
     }
 
     public String read() {
