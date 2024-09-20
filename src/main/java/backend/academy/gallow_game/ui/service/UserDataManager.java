@@ -1,9 +1,7 @@
 package backend.academy.gallow_game.ui.service;
 
 import java.util.Scanner;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @SuppressWarnings(value = "regexpsinglelinejava")
 public class UserDataManager {
 
