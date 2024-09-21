@@ -106,9 +106,9 @@ public class UserInterface {
         newLine();
     }
 
-    public void getCurrentWordState(WordStateManager wordManager) {
+    public void getCurrentWordState(String word) {
         dataManager.write(Messages.CURRENT_WORD.toString());
-        dataManager.write(wordManager.getEncodedWord());
+        dataManager.write(word);
         newLine();
     }
 
