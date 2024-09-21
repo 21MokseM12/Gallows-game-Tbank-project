@@ -9,6 +9,7 @@ import backend.academy.gallow_game.ui.enums.Logs;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
@@ -85,7 +86,7 @@ public final class GameFilesManager {
     }
 
     private List<String> getDataFromFile(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
             return reader.lines().collect(Collectors.toList());
         }
     }
