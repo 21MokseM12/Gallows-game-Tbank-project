@@ -4,7 +4,6 @@ import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
 import backend.academy.gallow_game.states.DictionaryStateManager;
-import backend.academy.gallow_game.states.WordStateManager;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
 import backend.academy.gallow_game.utils.GameFilesManager;
@@ -42,10 +41,6 @@ public class UserInterface {
     public void getErrorMessage() {
         dataManager.write(Messages.ERROR_MESSAGE.toString());
         doubleNewLine();
-    }
-
-    public void clear() {
-        //TODO
     }
 
     public void chooseDifficultLevel() {

@@ -40,8 +40,6 @@ public class Session {
     private int currentCountFails;
 
     public void start() {
-        ui.clear();
-
         chooseCategory();
         chooseDiffLevel();
 
@@ -118,7 +116,6 @@ public class Session {
             ui.chooseCategory();
             ui.chooseMenuVariant();
             category = ui.read();
-            ui.clear();
 
             if (categoryValidator.isValid(category)) {
                 break;
@@ -137,7 +134,6 @@ public class Session {
             ui.chooseDifficultLevel();
             ui.chooseMenuVariant();
             diffLevel = ui.read();
-            ui.clear();
 
             if (diffLevelValidator.isValid(diffLevel)) {
                 break;

@@ -15,7 +15,6 @@ public final class App {
     private App() {}
 
     public static void main(String[] args) {
-        UI.clear();
         UI.getGreeting();
 
         do {
@@ -23,8 +22,6 @@ public final class App {
             UI.chooseMenuVariant();
 
             String mainMenuResponse = UI.read();
-
-            UI.clear();
 
             switch (mainMenuResponse) {
                 case "1":
@@ -35,8 +32,6 @@ public final class App {
                     UI.chooseMenuVariant();
 
                     String rulesMenuResponse = UI.read();
-
-                    UI.clear();
 
                     switch (rulesMenuResponse) {
                         case "1":
