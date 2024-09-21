@@ -61,10 +61,9 @@ public class UserInterface {
         newLine();
     }
 
-    public void getMessageOfChosenCategory(int category) {
+    public void getMessageOfChosenCategory(String category) {
         String message = Messages.CHOSEN_CATEGORY.toString();
-        final String categoryString = String.valueOf(category);
-        message = switch (categoryString) {
+        message = switch (category) {
             case "1" -> message.concat(Category.CITIES.getCategoryRU());
             case "2" -> message.concat(Category.CLOTHES.getCategoryRU());
             case "3" -> message.concat(Category.EAT.getCategoryRU());
@@ -77,10 +76,9 @@ public class UserInterface {
         newLine();
     }
 
-    public void getMessageOfChosenDiffLevel(int diffLevel) {
+    public void getMessageOfChosenDiffLevel(String diffLevel) {
         String message = Messages.CHOSEN_DIFF_LEVEL.toString();
-        final String diffLevelString = String.valueOf(diffLevel);
-        message = switch (diffLevelString) {
+        message = switch (diffLevel) {
             case "1" -> message.concat(DifficultLevel.EASY.getLevelName());
             case "2" -> message.concat(DifficultLevel.MEDIUM.getLevelName());
             case "3" -> message.concat(DifficultLevel.HARD.getLevelName());

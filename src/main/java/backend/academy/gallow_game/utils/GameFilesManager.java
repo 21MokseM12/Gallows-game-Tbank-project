@@ -25,7 +25,7 @@ public final class GameFilesManager {
 
     private static final String PATH_TO_GALLOWS_STATES = "./src/main/resources/gallows_design/";
 
-    public static List<String> getWordList(int category, int diffLevel) throws WordNotFoundException {
+    public static List<String> getWordList(String category, String diffLevel) throws WordNotFoundException {
         String fullPath = addCategoryToPath(PATH_TO_WORDS_CATEGORIES, category);
         fullPath = addDiffLevelToPath(fullPath, diffLevel);
 
@@ -41,6 +41,7 @@ public final class GameFilesManager {
         try {
             return getDataFromFile(PATH_TO_DICTIONARY);
         } catch (IOException e) {
+            log.error(Logs.DICTIONARY_NOT_FOUND_LOG.toString(), e);
             throw new DictionaryNotFoundException(e);
         }
     }
@@ -49,13 +50,13 @@ public final class GameFilesManager {
         try {
             return getDataFromFile(PATH_TO_GALLOWS_STATES + countFails + "_fail.txt");
         } catch (IOException e) {
+            log.error(Logs.GALLOWS_STATE_NOT_FOUND_LOG.toString(), e);
             throw new GallowsStateNotFoundException(e);
         }
     }
 
-    private String addCategoryToPath(String path, int category) {
-        final String categoryString = String.valueOf(category);
-        return switch (categoryString) {
+    private String addCategoryToPath(String path, String category) {
+        return switch (category) {
             case "1" -> path
                 .concat(Category.CITIES.getCategoryEN())
                 .concat("/");
@@ -75,9 +76,8 @@ public final class GameFilesManager {
         };
     }
 
-    private String addDiffLevelToPath(String path, int diffLevel) {
-        final String diffLevelString = String.valueOf(diffLevel);
-        return switch (diffLevelString) {
+    private String addDiffLevelToPath(String path, String diffLevel) {
+        return switch (diffLevel) {
             case "1" -> path.concat(DifficultLevel.EASY.getFileName());
             case "2" -> path.concat(DifficultLevel.MEDIUM.getFileName());
             case "3" -> path.concat(DifficultLevel.HARD.getFileName());

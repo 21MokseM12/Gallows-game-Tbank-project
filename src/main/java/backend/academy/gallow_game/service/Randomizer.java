@@ -15,7 +15,7 @@ public class Randomizer {
 
     private static final int END_NUMBER_COUNTDOWN_DIFF_LEVEL = 4;
 
-    public String getRandomWord(int category, int diffLevel) throws WordNotFoundException {
+    public String getRandomWord(String category, String diffLevel) throws WordNotFoundException {
         List<String> wordList = GameFilesManager.getWordList(category, diffLevel);
         return wordList.get(random.nextInt(wordList.size()));
     }

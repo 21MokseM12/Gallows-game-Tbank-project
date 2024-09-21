@@ -47,7 +47,7 @@ public class Session {
 
         String word;
         try {
-            word = randomizer.getRandomWord(Integer.parseInt(category), Integer.parseInt(diffLevel)).toUpperCase();
+            word = randomizer.getRandomWord(category, diffLevel).toUpperCase();
             dictionary.dictionaryCompletion();
             wordManager.word(word);
             wordManager.correctWord(word);
@@ -59,8 +59,8 @@ public class Session {
         }
 
         ui.sessionBegin();
-        ui.getMessageOfChosenCategory(Integer.parseInt(category));
-        ui.getMessageOfChosenDiffLevel(Integer.parseInt(diffLevel));
+        ui.getMessageOfChosenCategory(category);
+        ui.getMessageOfChosenDiffLevel(diffLevel);
 
         while (state.equals(GameState.PLAY)) {
             try {

@@ -12,13 +12,13 @@ public class GameFilesManagerTest {
     @Test
     public void checkSuccessListTest() throws WordNotFoundException {
         List<String> list = List.of("Прага", "Афины", "Керчь", "Минск", "Пекин", "Ханой", "Ухань", "Тверь", "Брест", "Псков");
-        Assertions.assertEquals(list, GameFilesManager.getWordList(1,1));
+        Assertions.assertEquals(list, GameFilesManager.getWordList("1","1"));
     }
 
     @Test
     public void checkDeniedListTest() throws WordNotFoundException {
         List<String> list = List.of("Прага", "", "Керчь", "", "Пекин", "Hello, world!", "Ухань", "Тверь", "Брест", "Псков");
-        Assertions.assertNotEquals(list, GameFilesManager.getWordList(1,1));
+        Assertions.assertNotEquals(list, GameFilesManager.getWordList("1","1"));
     }
 
     @Test

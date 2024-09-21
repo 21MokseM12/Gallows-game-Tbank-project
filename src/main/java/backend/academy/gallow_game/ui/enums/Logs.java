@@ -6,7 +6,11 @@ public enum Logs {
 
     DISPLAY_FILE_NOT_FOUND_LOG("Файл отображения не был найден"),
 
-    WORD_NOT_FOUND_LOG("Слово не было найдено");
+    WORD_NOT_FOUND_LOG("Слово не было найдено"),
+
+    DICTIONARY_NOT_FOUND_LOG("Алфавит не был найден"),
+
+    GALLOWS_STATE_NOT_FOUND_LOG("Состояние виселицы не было найдено");
 
     private final String log;
 
