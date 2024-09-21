@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
@@ -72,7 +73,7 @@ public final class GameFilesManager {
             case "5" -> path
                 .concat(Category.TECHNIC.getCategoryEN())
                 .concat("/");
-            default -> path;
+            default -> throw new NoSuchElementException();
         };
     }
 
@@ -81,7 +82,7 @@ public final class GameFilesManager {
             case "1" -> path.concat(DifficultLevel.EASY.getFileName());
             case "2" -> path.concat(DifficultLevel.MEDIUM.getFileName());
             case "3" -> path.concat(DifficultLevel.HARD.getFileName());
-            default -> path;
+            default -> throw new NoSuchElementException();
         };
     }
 

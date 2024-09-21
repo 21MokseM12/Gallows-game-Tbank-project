@@ -8,6 +8,7 @@ import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
 import backend.academy.gallow_game.utils.GameFilesManager;
 import lombok.extern.log4j.Log4j2;
+import java.util.NoSuchElementException;
 
 @Log4j2
 public class UserInterface {
@@ -64,7 +65,7 @@ public class UserInterface {
             case "3" -> message.concat(Category.EAT.getCategoryRU());
             case "4" -> message.concat(Category.SPORT.getCategoryRU());
             case "5" -> message.concat(Category.TECHNIC.getCategoryRU());
-            default -> message;
+            default -> throw new NoSuchElementException();
         };
 
         dataManager.write(message);
@@ -77,7 +78,7 @@ public class UserInterface {
             case "1" -> message.concat(DifficultLevel.EASY.getLevelName());
             case "2" -> message.concat(DifficultLevel.MEDIUM.getLevelName());
             case "3" -> message.concat(DifficultLevel.HARD.getLevelName());
-            default -> message;
+            default -> throw new NoSuchElementException();
         };
 
         dataManager.write(message);
