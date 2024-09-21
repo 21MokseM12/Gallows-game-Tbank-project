@@ -70,7 +70,7 @@ public class Session {
                 log.error(Logs.DISPLAY_FILE_NOT_FOUND_LOG.toString(), e);
                 System.exit(0);
             }
-            ui.getCurrentWordState(wordManager);
+            ui.getCurrentWordState(wordManager.getEncodedWord());
             ui.getCurrentCountFails(currentCountFails);
             ui.getCurrentDictionaryState(dictionary);
 
@@ -105,6 +105,7 @@ public class Session {
 
         try {
             ui.getCurrentGallowsState(countFails, currentCountFails);
+            ui.getCurrentWordState(wordManager.correctWord());
         } catch (GallowsStateNotFoundException e) {
             ui.getErrorMessage();
             log.error(Logs.DISPLAY_FILE_NOT_FOUND_LOG.toString(), e);
