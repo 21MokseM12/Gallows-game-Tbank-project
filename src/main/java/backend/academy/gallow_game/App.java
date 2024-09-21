@@ -10,7 +10,9 @@ public final class App {
 
     private static final Session SESSION = new Session();
 
-    private static boolean stopGameFlag = false;
+    private static boolean exitGameFlag = false;
+
+    private static boolean exitRulesFlag = false;
 
     private App() {}
 
@@ -29,44 +31,49 @@ public final class App {
                     break;
                 case "2":
                     UI.getRulesFormatted(SESSION.countFails());
-                    UI.chooseMenuVariant();
 
-                    String rulesMenuResponse = UI.read();
+                    while (!exitRulesFlag) {
+                        UI.chooseMenuVariant();
+                        String rulesMenuResponse = UI.read();
 
-                    switch (rulesMenuResponse) {
-                        case "1":
-                            SESSION.start();
-                            break;
-                        case "2":
-                            UI.getExitMessage();
-                            stopGameFlag = true;
-                            break;
-                        default:
-                            UI.getErrorMessage();
-                            break;
+                        switch (rulesMenuResponse) {
+                            case "1":
+                                SESSION.start();
+                                exitRulesFlag = true;
+                                break;
+                            case "2":
+                                UI.getExitMessage();
+                                exitRulesFlag = true;
+                                exitGameFlag = true;
+                                break;
+                            default:
+                                UI.getErrorMessage();
+                                break;
+                        }
                     }
                     break;
                 case "3":
                     UI.getExitMessage();
-                    stopGameFlag = true;
+                    exitGameFlag = true;
                     break;
                 default:
                     UI.getErrorMessage();
                     break;
             }
 
-            if (!stopGameFlag) {
+            if (!exitGameFlag) {
                 UI.playAgainMessage();
                 UI.chooseMenuVariant();
                 String anotherGameResponse = UI.read();
 
                 if (anotherGameResponse.equals("2")) {
-                    stopGameFlag = true;
+                    exitGameFlag = true;
+                    UI.getExitMessage();
+                } else {
+                    exitRulesFlag = false;
                 }
             }
 
-        } while (!stopGameFlag);
-
-        UI.getExitMessage();
+        } while (!exitGameFlag);
     }
 }
