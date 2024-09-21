@@ -1,5 +1,6 @@
 package backend.academy.gallow_game.states;
 
+import lombok.Getter;
 import lombok.Setter;
 
 @Setter
@@ -7,7 +8,7 @@ public class WordStateManager {
 
     private String word;
 
-    private String correctWord;
+    @Getter private String correctWord;
 
     public void changeLetter(String letter) {
         this.word = word.replace(letter, "_");
@@ -33,10 +34,6 @@ public class WordStateManager {
         }
 
         return resultWord.toString();
-    }
-
-    public String getDecodedWord() {
-        return this.word;
     }
 
     public boolean contains(String letter) {

@@ -8,20 +8,6 @@ public class WordStateManagerTest {
     private final WordStateManager stateManager = new WordStateManager();
 
     @Test
-    public void checkChangeLetterSuccess() {
-        stateManager.word("Виселица");
-        stateManager.changeLetter("и");
-        Assertions.assertEquals("В_сел_ца", stateManager.getDecodedWord());
-    }
-
-    @Test
-    public void checkChangeLetterDenied() {
-        stateManager.word("Виселица");
-        stateManager.changeLetter("и");
-        Assertions.assertNotEquals("Висел_ца", stateManager.getDecodedWord());
-    }
-
-    @Test
     public void checkWordIsGuessedSuccess() {
         stateManager.word("___");
         Assertions.assertTrue(stateManager.wordIsGuessed());
