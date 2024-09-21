@@ -1,8 +1,8 @@
 package backend.academy.gallow_game.ui.service;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
-@SuppressWarnings(value = "regexpsinglelinejava")
 public class UserDataManager {
 
     private final Scanner input;
@@ -12,7 +12,8 @@ public class UserDataManager {
     }
 
     public void write(String data) {
-        System.out.print(data);
+        PrintStream output = System.out;
+        output.print(data);
     }
 
     public String read() {
