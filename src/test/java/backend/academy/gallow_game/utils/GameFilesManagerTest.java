@@ -35,11 +35,11 @@ public class GameFilesManagerTest {
 
     @Test
     public void checkSuccessHintTest() throws WordNotFoundException {
-        Assertions.assertEquals("блюдо из мяса и подливы", GameFilesManager.getHint("3", "1", "Гуляш"));
+        Assertions.assertEquals("блюдо из мяса и подливы", GameFilesManager.getHint("3", "1", "Гуляш".toUpperCase()));
     }
 
     @Test
     public void checkDeniedHintTest() throws WordNotFoundException {
-        Assertions.assertNotEquals("блюдо из мяса и подливы", GameFilesManager.getHint("4", "1", "Спорт"));
+        Assertions.assertNotEquals("блюдо из мяса и подливы", GameFilesManager.getHint("4", "1", "Спорт".toUpperCase()));
     }
 }

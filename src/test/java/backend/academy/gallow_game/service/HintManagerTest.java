@@ -7,13 +7,13 @@ public class HintManagerTest {
 
     @Test
     public void checkIsTimeToHintSuccess() {
-        HintManager manager = new HintManager("1", "3", "Нефтекамск");
+        HintManager manager = new HintManager("1", "3", "Нефтекамск".toUpperCase());
         Assertions.assertTrue(manager.isTimeToHint(2));
     }
 
     @Test
     public void checkIsTimeToHintDenied() {
-        HintManager manager = new HintManager("1", "3", "Нефтекамск");
+        HintManager manager = new HintManager("1", "3", "Нефтекамск".toUpperCase());
         Assertions.assertFalse(manager.isTimeToHint(8));
     }
 }
