@@ -3,6 +3,7 @@ package backend.academy.gallow_game.ui;
 import backend.academy.gallow_game.enums.Category;
 import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
+import backend.academy.gallow_game.service.HintManager;
 import backend.academy.gallow_game.states.DictionaryStateManager;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
@@ -83,6 +84,11 @@ public class UserInterface {
 
         dataManager.write(message);
         doubleNewLine();
+    }
+
+    public void getHint(HintManager hintManager) {
+        dataManager.write(Messages.HINT_MESSAGE + hintManager.hint());
+        newLine();
     }
 
     public void playAgainMessage() {

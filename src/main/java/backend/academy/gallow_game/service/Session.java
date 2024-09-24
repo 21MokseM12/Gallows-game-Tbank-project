@@ -31,6 +31,8 @@ public class Session {
 
     @Getter private final int countFails = 10;
 
+    private final String DEFAULT_WORD = "Виселица";
+
     private String category;
 
     private String diffLevel;
@@ -43,7 +45,7 @@ public class Session {
         chooseCategory();
         chooseDiffLevel();
 
-        String word;
+        String word = DEFAULT_WORD;
         try {
             word = randomizer.getRandomWord(category, diffLevel).toUpperCase();
             dictionary.dictionaryCompletion();
@@ -55,6 +57,7 @@ public class Session {
             log.error(Logs.IOEXCEPTION_WRAPPER_NOT_FOUND_LOG.toString(), e);
             System.exit(0);
         }
+        HintManager hintManager = new HintManager(category, diffLevel, word);
 
         ui.sessionBegin();
         ui.getMessageOfChosenCategory(category);
@@ -68,7 +71,11 @@ public class Session {
                 log.error(Logs.DISPLAY_FILE_NOT_FOUND_LOG.toString(), e);
                 System.exit(0);
             }
+
             ui.getCurrentWordState(wordManager.getEncodedWord());
+            if (hintManager.isTimeToHint(currentCountFails)) {
+                ui.getHint(hintManager);
+            }
             ui.getCurrentCountFails(currentCountFails);
             ui.getCurrentDictionaryState(dictionary);
 

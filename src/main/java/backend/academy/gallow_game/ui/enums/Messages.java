@@ -100,7 +100,9 @@ public enum Messages {
 
     WIN_MESSAGE("Поздравляю, ты победил!!!"),
 
-    LOSE_MESSAGE("К сожалению, ты проиграл :(");
+    LOSE_MESSAGE("К сожалению, ты проиграл :("),
+
+    HINT_MESSAGE("Подсказка: ");
 
     private final String message;
 
