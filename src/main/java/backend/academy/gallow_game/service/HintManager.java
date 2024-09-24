@@ -13,7 +13,13 @@ public class HintManager {
 
     private final String diffLevel;
 
-    public HintManager(String category, String diffLevel, String word){
+    private final int easyHintFrontier = 7;
+
+    private final int mediumHintFrontier = 5;
+
+    private final int hardHintFrontier = 3;
+
+    public HintManager(String category, String diffLevel, String word) {
         String s;
         try {
             s = GameFilesManager.getHint(category, diffLevel, word);
@@ -28,9 +34,9 @@ public class HintManager {
 
     public boolean isTimeToHint(int countFails) {
         return switch (diffLevel) {
-            case "1" -> countFails <= 7;
-            case "2" -> countFails <= 5;
-            case "3" -> countFails <= 3;
+            case "1" -> countFails <= easyHintFrontier;
+            case "2" -> countFails <= mediumHintFrontier;
+            case "3" -> countFails <= hardHintFrontier;
             default -> false;
         };
 

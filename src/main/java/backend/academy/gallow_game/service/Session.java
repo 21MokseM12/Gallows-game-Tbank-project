@@ -31,7 +31,7 @@ public class Session {
 
     @Getter private final int countFails = 10;
 
-    private final String DEFAULT_WORD = "Виселица";
+    private final String defaultWord = "Виселица";
 
     private String category;
 
@@ -45,7 +45,7 @@ public class Session {
         chooseCategory();
         chooseDiffLevel();
 
-        String word = DEFAULT_WORD;
+        String word = defaultWord;
         try {
             word = randomizer.getRandomWord(category, diffLevel).toUpperCase();
             dictionary.dictionaryCompletion();
