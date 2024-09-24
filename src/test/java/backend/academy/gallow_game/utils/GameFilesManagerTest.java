@@ -32,4 +32,14 @@ public class GameFilesManagerTest {
         List<String> list = new ArrayList<>();
         Assertions.assertNotEquals(list, GameFilesManager.getDictionary());
     }
+
+    @Test
+    public void checkSuccessHintTest() throws WordNotFoundException {
+        Assertions.assertEquals("блюдо из мяса и подливы", GameFilesManager.getHint("3", "1", "Гуляш"));
+    }
+
+    @Test
+    public void checkDeniedHintTest() throws WordNotFoundException {
+        Assertions.assertNotEquals("блюдо из мяса и подливы", GameFilesManager.getHint("4", "1", "Спорт"));
+    }
 }
