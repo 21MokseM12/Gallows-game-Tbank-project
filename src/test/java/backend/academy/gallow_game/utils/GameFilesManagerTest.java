@@ -1,5 +1,7 @@
 package backend.academy.gallow_game.utils;
 
+import backend.academy.gallow_game.enums.Category;
+import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import org.junit.jupiter.api.Assertions;
@@ -12,13 +14,13 @@ public class GameFilesManagerTest {
     @Test
     public void checkSuccessListTest() throws WordNotFoundException {
         List<String> list = List.of("Прага", "Афины", "Керчь", "Минск", "Пекин", "Ханой", "Ухань", "Тверь", "Брест", "Псков");
-        Assertions.assertEquals(list, GameFilesManager.getWordList("1","1"));
+        Assertions.assertEquals(list, GameFilesManager.getWordList(Category.CITIES, DifficultLevel.EASY));
     }
 
     @Test
     public void checkDeniedListTest() throws WordNotFoundException {
         List<String> list = List.of("Прага", "", "Керчь", "", "Пекин", "Hello, world!", "Ухань", "Тверь", "Брест", "Псков");
-        Assertions.assertNotEquals(list, GameFilesManager.getWordList("1","1"));
+        Assertions.assertNotEquals(list, GameFilesManager.getWordList(Category.CITIES, DifficultLevel.EASY));
     }
 
     @Test
@@ -35,11 +37,11 @@ public class GameFilesManagerTest {
 
     @Test
     public void checkSuccessHintTest() throws WordNotFoundException {
-        Assertions.assertEquals("блюдо из мяса и подливы", GameFilesManager.getHint("3", "1", "Гуляш".toUpperCase()));
+        Assertions.assertEquals("блюдо из мяса и подливы", GameFilesManager.getHint(Category.EAT, DifficultLevel.EASY, "Гуляш".toUpperCase()));
     }
 
     @Test
     public void checkDeniedHintTest() throws WordNotFoundException {
-        Assertions.assertNotEquals("блюдо из мяса и подливы", GameFilesManager.getHint("4", "1", "Спорт".toUpperCase()));
+        Assertions.assertNotEquals("блюдо из мяса и подливы", GameFilesManager.getHint(Category.SPORT, DifficultLevel.EASY, "Спорт".toUpperCase()));
     }
 }
