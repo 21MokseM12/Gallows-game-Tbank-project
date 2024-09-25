@@ -1,15 +1,15 @@
 package backend.academy.gallow_game.service;
 
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
+import backend.academy.gallow_game.ui.enums.Logs;
 import backend.academy.gallow_game.utils.GameFilesManager;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
-@Getter
 @Log4j2
 public class HintManager {
 
-    private final String hint;
+    @Getter private final String hint;
 
     private final String diffLevel;
 
@@ -25,7 +25,7 @@ public class HintManager {
             s = GameFilesManager.getHint(category, diffLevel, word);
         } catch (WordNotFoundException e) {
             s = "Подсказка";
-            log.error("Подсказка не была найдена", e);
+            log.error(Logs.WORD_NOT_FOUND_LOG.toString(), e);
         }
         this.hint = s;
 
