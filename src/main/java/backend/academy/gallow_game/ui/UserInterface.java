@@ -8,7 +8,6 @@ import backend.academy.gallow_game.states.DictionaryStateManager;
 import backend.academy.gallow_game.ui.enums.Messages;
 import backend.academy.gallow_game.ui.service.UserDataManager;
 import backend.academy.gallow_game.utils.GameFilesManager;
-import java.util.NoSuchElementException;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -58,31 +57,19 @@ public class UserInterface {
         newLine();
     }
 
-    public void getMessageOfChosenCategory(String category) {
-        String message = Messages.CHOSEN_CATEGORY.toString();
-        message = switch (category) {
-            case "1" -> message.concat(Category.CITIES.getCategoryRU());
-            case "2" -> message.concat(Category.CLOTHES.getCategoryRU());
-            case "3" -> message.concat(Category.EAT.getCategoryRU());
-            case "4" -> message.concat(Category.SPORT.getCategoryRU());
-            case "5" -> message.concat(Category.TECHNIC.getCategoryRU());
-            default -> throw new NoSuchElementException();
-        };
-
-        dataManager.write(message);
+    public void getMessageOfChosenCategory(Category category) {
+        dataManager.write(
+            Messages.CHOSEN_CATEGORY.toString()
+                .concat(category.categoryNameRU())
+        );
         newLine();
     }
 
-    public void getMessageOfChosenDiffLevel(String diffLevel) {
-        String message = Messages.CHOSEN_DIFF_LEVEL.toString();
-        message = switch (diffLevel) {
-            case "1" -> message.concat(DifficultLevel.EASY.getLevelName());
-            case "2" -> message.concat(DifficultLevel.MEDIUM.getLevelName());
-            case "3" -> message.concat(DifficultLevel.HARD.getLevelName());
-            default -> throw new NoSuchElementException();
-        };
-
-        dataManager.write(message);
+    public void getMessageOfChosenDiffLevel(DifficultLevel diffLevel) {
+        dataManager.write(
+            Messages.CHOSEN_DIFF_LEVEL.toString()
+                .concat(diffLevel.diffLevelName())
+        );
         doubleNewLine();
     }
 

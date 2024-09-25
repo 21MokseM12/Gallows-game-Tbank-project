@@ -1,5 +1,7 @@
 package backend.academy.gallow_game.service;
 
+import backend.academy.gallow_game.enums.Category;
+import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.exceptions.WordNotFoundException;
 import backend.academy.gallow_game.ui.enums.Logs;
 import backend.academy.gallow_game.utils.GameFilesManager;
@@ -11,15 +13,9 @@ public class HintManager {
 
     @Getter private final String hint;
 
-    private final String diffLevel;
+    private final DifficultLevel diffLevel;
 
-    private final int easyHintFrontier = 7;
-
-    private final int mediumHintFrontier = 5;
-
-    private final int hardHintFrontier = 3;
-
-    public HintManager(String category, String diffLevel, String word) {
+    public HintManager(Category category, DifficultLevel diffLevel, String word) {
         String s;
         try {
             s = GameFilesManager.getHint(category, diffLevel, word);
@@ -33,12 +29,6 @@ public class HintManager {
     }
 
     public boolean isTimeToHint(int countFails) {
-        return switch (diffLevel) {
-            case "1" -> countFails <= easyHintFrontier;
-            case "2" -> countFails <= mediumHintFrontier;
-            case "3" -> countFails <= hardHintFrontier;
-            default -> false;
-        };
-
+        return countFails <= diffLevel.hintFrontier();
     }
 }

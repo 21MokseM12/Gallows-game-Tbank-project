@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +27,7 @@ public final class GameFilesManager {
 
     private static final String PATH_TO_GALLOWS_STATES = "./src/main/resources/gallows_design/";
 
-    public static List<String> getWordList(String category, String diffLevel) throws WordNotFoundException {
+    public static List<String> getWordList(Category category, DifficultLevel diffLevel) throws WordNotFoundException {
         String fullPath = addCategoryToPath(PATH_TO_WORDS_CATEGORIES, category);
         fullPath = addDiffLevelToPath(fullPath, diffLevel);
 
@@ -40,7 +39,11 @@ public final class GameFilesManager {
         }
     }
 
-    public static String getHint(String category, String diffLevel, String word) throws WordNotFoundException {
+    public static String getHint(
+        Category category,
+        DifficultLevel diffLevel,
+        String word
+    ) throws WordNotFoundException {
         String fullPath = addCategoryToPath(PATH_TO_HINTS, category);
         fullPath = addDiffLevelToPath(fullPath, diffLevel);
 
@@ -71,34 +74,14 @@ public final class GameFilesManager {
         }
     }
 
-    private String addCategoryToPath(String path, String category) {
-        return switch (category) {
-            case "1" -> path
-                .concat(Category.CITIES.getCategoryEN())
-                .concat("/");
-            case "2" -> path
-                .concat(Category.CLOTHES.getCategoryEN())
-                .concat("/");
-            case "3" -> path
-                .concat(Category.EAT.getCategoryEN())
-                .concat("/");
-            case "4" -> path
-                .concat(Category.SPORT.getCategoryEN())
-                .concat("/");
-            case "5" -> path
-                .concat(Category.TECHNIC.getCategoryEN())
-                .concat("/");
-            default -> throw new NoSuchElementException();
-        };
+    private String addCategoryToPath(String path, Category category) {
+        return path
+            .concat(category.categoryNameEN())
+            .concat("/");
     }
 
-    private String addDiffLevelToPath(String path, String diffLevel) {
-        return switch (diffLevel) {
-            case "1" -> path.concat(DifficultLevel.EASY.getFileName());
-            case "2" -> path.concat(DifficultLevel.MEDIUM.getFileName());
-            case "3" -> path.concat(DifficultLevel.HARD.getFileName());
-            default -> throw new NoSuchElementException();
-        };
+    private String addDiffLevelToPath(String path, DifficultLevel diffLevel) {
+        return path.concat(diffLevel.diffLevelFileName());
     }
 
     private List<String> getDataFromFile(String filePath) throws IOException {

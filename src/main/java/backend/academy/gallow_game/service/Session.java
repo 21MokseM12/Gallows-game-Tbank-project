@@ -1,5 +1,7 @@
 package backend.academy.gallow_game.service;
 
+import backend.academy.gallow_game.enums.Category;
+import backend.academy.gallow_game.enums.DifficultLevel;
 import backend.academy.gallow_game.enums.GameState;
 import backend.academy.gallow_game.exceptions.DictionaryNotFoundException;
 import backend.academy.gallow_game.exceptions.GallowsStateNotFoundException;
@@ -33,9 +35,9 @@ public class Session {
 
     private final String defaultWord = "Виселица";
 
-    private String category;
+    private Category category;
 
-    private String diffLevel;
+    private DifficultLevel diffLevel;
 
     private GameState state = GameState.PLAY;
 
@@ -122,35 +124,38 @@ public class Session {
         while (true) {
             ui.chooseCategory();
             ui.chooseMenuVariant();
-            category = ui.read();
+            String input = ui.read();
 
-            if (categoryValidator.isValid(category)) {
+            if (categoryValidator.isValid(input)) {
+                if (input.equals("6")) {
+                    category = randomizer.getRandomCategory();
+                } else {
+                    category = Category.valueOfMenuNumber(input);
+                }
                 break;
             } else {
                 ui.getErrorMessage();
             }
         }
 
-        if (category.equals("6")) {
-            category = randomizer.getRandomCategory();
-        }
     }
 
     private void chooseDiffLevel() {
         while (true) {
             ui.chooseDifficultLevel();
             ui.chooseMenuVariant();
-            diffLevel = ui.read();
+            String input = ui.read();
 
-            if (diffLevelValidator.isValid(diffLevel)) {
+            if (diffLevelValidator.isValid(input)) {
+                if (input.equals("4")) {
+                    diffLevel = randomizer.getRandomDiffLevel();
+                } else {
+                    diffLevel = DifficultLevel.valueOfMenuNumber(input);
+                }
                 break;
             } else {
                 ui.getErrorMessage();
             }
-        }
-
-        if (diffLevel.equals("4")) {
-            diffLevel = randomizer.getRandomDiffLevel();
         }
     }
 }
